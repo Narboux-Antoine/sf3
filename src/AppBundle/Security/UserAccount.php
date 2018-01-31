@@ -42,6 +42,11 @@ class UserAccount implements UserInterface
         // nothing to do
     }
 
+    public function getId(){
+
+        return $this->member->getId();
+    }
+
     private function __construct(Member $member)
     {
         $this->member = $member;

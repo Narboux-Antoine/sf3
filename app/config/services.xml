@@ -50,5 +50,12 @@
             <tag name="console.command" />
         </service>
 
+        <service id="repositories.proposition.dbal" class="Tiquette\Infrastructure\Repositories\DbalPropositionRepository">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+        </service>
+
+        <service id="repositories.proposition" alias="repositories.proposition.dbal" />
+
+
     </services>
 </container>

@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des Tickets{% endblock %}
+
+
+{% block body %}
+    {#{{ tickets.event_name }}#}
+    <ul>
+   {% for ticket in tickets %}
+       <li><p>{{ ticket.eventName }}
+                description :  {{ ticket.eventDescription }}
+
+           </p>
+           <a href="{{ path('proposition_new',{'id_ticket': ticket.id}) }}"><button>Ajouter une proposition</button>
+           </a>
+       </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
+
