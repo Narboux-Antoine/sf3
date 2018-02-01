@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Tiquette\Domain\Email;
 
 class MembersController extends Controller
 {
@@ -55,4 +56,33 @@ class MembersController extends Controller
     }
 
     public function signOutAction(Request $request) {}
+
+    public function viewProfileAction(Request $request):Response{
+
+        $email_member = $this->getUser()->getUsername();
+
+        $member = $this->get('repositories.member')->findByEmail(new Email($email_member));
+
+
+        $memberSignUp = new MemberSignUp();
+
+        $memberSignUpForm = $this->createForm(MemberSignUpType::class, $memberSignUp);
+
+        if ($request->isMethod('POST')) {
+
+            $memberSignUpForm->handleRequest($request);
+            if ($memberSignUpForm->isSubmitted() && $memberSignUpForm->isValid()) {
+
+               //Envoi du mail
+
+                return $this->redirectToRoute('member_sign_up_successful');
+            }
+        }
+
+        return $this->render('@App/Members/member_profile.html.twig', [
+            'member' => $member,
+            'newEmailForm' => $memberSignUpForm->createView()
+        ]);
+
+    }
 }

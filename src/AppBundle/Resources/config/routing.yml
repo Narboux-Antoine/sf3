@@ -49,6 +49,10 @@ member_sign_in:
     path:     /members/signin
     defaults: { _controller: AppBundle:Members:signIn }
 
+member_profile:
+    path:     /members/profile
+    defaults: { _controller: AppBundle:Members:viewProfile }
+
 member_sign_out:
     path:     /members/signout
     defaults: { _controller: AppBundle:Members:signOut }
