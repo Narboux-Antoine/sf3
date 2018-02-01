@@ -19,11 +19,11 @@ class Proposition
 
     public static function submit(string $describe, int $price, string $id_tickets, string $id_members): self
     {
-        return new self(GeneratorId::generate(),$describe, $price, $id_tickets, $id_members);
+        return new self(GeneratorId::generate()->__toString(),$describe, $price, $id_tickets, $id_members);
     }
 
 
-    private function __construct(GeneratorId $generatorId, string $describe, int $price, string $id_tickets, string $id_members)
+    private function __construct(String $generatorId, string $describe, int $price, string $id_tickets, string $id_members)
     {
         $this->id = $generatorId;
         $this->describe = $describe;
@@ -44,7 +44,7 @@ class Proposition
     /**
      * @return GeneratorId
      */
-    public function getId(): GeneratorId
+    public function getId(): String
     {
         return $this->id;
     }
@@ -66,9 +66,9 @@ class Proposition
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdMembers(): int
+    public function getIdMembers(): string
     {
         return $this->id_members;
     }

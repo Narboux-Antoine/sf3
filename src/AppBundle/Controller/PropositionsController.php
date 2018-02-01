@@ -14,6 +14,7 @@ use AppBundle\Forms\Types\PropositionSubmissionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Tiquette\Domain\GeneratorId;
 use Tiquette\Domain\Proposition;
 
 class PropositionsController extends Controller
@@ -33,6 +34,8 @@ class PropositionsController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
 
 //                $ticket = $this->get('ticket_factory')->fromTicketSubmission($propositionsubmission);
+
+//                var_dump(GeneratorId::generate()->__toString());
 
                 $proposition = Proposition::submit(
                     $propositionsubmission->describe,

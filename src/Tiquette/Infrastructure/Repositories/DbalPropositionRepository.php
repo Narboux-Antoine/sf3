@@ -16,10 +16,19 @@ use Doctrine\DBAL\Connection;
 
 class DbalPropositionRepository implements PropositionRepository
 {
+
+    private $connection;
+
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+    }
+
+
     public function save(Proposition $proposition): void
     {
         $data = [
-            'uuid' => $proposition->getId(),
+            'uuid' => (string)$proposition->getId(),
             'describe' => $proposition->getDescribe(),
             'price' => $proposition->getPrice(),
             'id_tickets' => $proposition->getIdTickets(),
@@ -27,7 +36,8 @@ class DbalPropositionRepository implements PropositionRepository
             'price_currency' => 'EUR',
         ];
 
-        $this->connection->insert('propositions', $data);
+        dump($this->connection->insert('propositions', $data));
+        die;
     }
 
 }
